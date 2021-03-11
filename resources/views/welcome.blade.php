@@ -142,7 +142,7 @@
                         <div class="p-6">
                             <div class="flex items-center">
                                 <div class="text-lg leading-7 font-semibold text-center block" style="width: 100%">
-                                    <a target="_blank" href="https://github.com/DamianUS/miProyecto" class="underline text-gray-900 dark:text-white">Proyecto citas de ejemplo de CGIS 2020/21</a>
+                                    <a target="_blank" href="https://github.com/DamianUS/cgis-2021" class="underline text-gray-900 dark:text-white">Proyecto citas de ejemplo de CGIS 2020/21</a>
                                 </div>
                             </div>
 
