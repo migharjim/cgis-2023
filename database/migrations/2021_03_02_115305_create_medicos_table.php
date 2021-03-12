@@ -19,6 +19,7 @@ class CreateMedicosTable extends Migration
             $table->date('fecha_contratacion');
             $table->boolean('vacunado');
             $table->double('sueldo');
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->softDeletes();
         });
     }

@@ -14,7 +14,7 @@ class AddEspecialidadToMedicosTable extends Migration
     public function up()
     {
         Schema::table('medicos', function (Blueprint $table) {
-            $table->foreign('especialidad_id')->nullable()->references('id')->on('especialidads')->onDelete('set null');
+            $table->foreignId('especialidad_id')->nullable()->constrained()->onDelete('set null');
         });
     }
 

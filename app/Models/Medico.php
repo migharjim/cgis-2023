@@ -17,6 +17,10 @@ class Medico extends Model
         'fecha_contratacion' => 'datetime:Y-m-d'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function especialidad(){
         return $this->belongsTo(Especialidad::class);
     }

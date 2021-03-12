@@ -20,9 +20,8 @@ class CreateCitaMedicamentoTable extends Migration
             $table->text('comentarios')->nullable();
             $table->date('inicio');
             $table->date('fin');
-            $table->foreign('cita_id')->references('id')->on('citas')->onDelete('cascade');
-            $table->foreign('medicamento_id')->references('id')->on('medicamentos')->onDelete('cascasde');
-
+            $table->foreignId('cita_id')->constrained()->onDelete('cascade');
+            $table->foreignId('medicamento_id')->constrained()->onDelete('cascade');
         });
     }
 
