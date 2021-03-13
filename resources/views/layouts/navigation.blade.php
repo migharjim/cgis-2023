@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
                         {{ __('Especialidades') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('medicos.index')" :active="request()->routeIs('medicos.index') or request()->routeIs('medicos.create') or request()->routeIs('medicos.edit') or request()->routeIs('medicos.show')">
+                        {{ __('Médicos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -72,6 +75,7 @@
             <x-responsive-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
                 {{ __('Especialidades') }}
             </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->

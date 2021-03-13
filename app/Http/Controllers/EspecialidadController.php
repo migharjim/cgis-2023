@@ -120,8 +120,11 @@ class EspecialidadController extends Controller
     {
         if($especialidad->delete()) {
             session()->flash('success', 'Especialidad borrada correctamente. Si nos da tiempo haremos este mensaje internacionalizable y parametrizable');
-            return redirect()->route('especialidads.index');
         }
+        else{
+            session()->flash('warning', 'No pudo borrarse la especialidad.');
+        }
+        return redirect()->route('especialidads.index');
 
     }
 }
