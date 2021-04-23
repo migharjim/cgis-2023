@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class EspecialidadSeeder extends Seeder
 {
@@ -13,6 +14,19 @@ class EspecialidadSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('especialidads')->insert([
+            [
+                'nombre' => "Oftalmología",
+            ],
+            [
+                'nombre' => "Neurología",
+            ],
+            [
+                'nombre' => "Cardiología",
+            ],
+            [
+                'nombre' => "Dermatología",
+            ],
+        ]);
     }
 }
