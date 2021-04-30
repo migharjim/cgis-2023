@@ -18,9 +18,11 @@
                     <x-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
                         {{ __('Especialidades') }}
                     </x-nav-link>
+                    @if(Auth::user()->tipo_usuario_id != 2)
                     <x-nav-link :href="route('medicos.index')" :active="request()->routeIs('medicos.index') or request()->routeIs('medicos.create') or request()->routeIs('medicos.edit') or request()->routeIs('medicos.show')">
                         {{ __('Médicos') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

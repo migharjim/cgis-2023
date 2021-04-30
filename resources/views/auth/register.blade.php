@@ -11,6 +11,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <input type="hidden" value="2" name="tipo_usuario_id">
 
             <!-- Name -->
             <div>
@@ -43,6 +44,12 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="nuhsa" :value="__('NUHSA')" />
+
+                <x-input id="nuhsa" class="block mt-1 w-full" type="text" name="nuhsa" :value="old('nuhsa') ? old('nuhsa') : 'AN'" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">

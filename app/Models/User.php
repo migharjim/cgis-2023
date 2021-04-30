@@ -46,7 +46,26 @@ class User extends Authenticatable
         return $this->hasOne(Medico::class);
     }
 
-    public function getEsMedicoAttribute(){
-        return $this->medico()->exists();
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class);
+    }
+
+    //$user->tipo_usuario_id
+    public function getTipoUsuarioIdAttribute(){
+        if ($this->medico()->exists()){
+            return 1;
+        }
+        elseif($this->paciente()->exists()){
+            return 2;
+        }
+        else{
+            return 3;
+        }
+    }
+
+    public function getTipoUsuarioAttribute(){
+        $tipos_usuario = [1 => trans('Médico'), 2 => trans('Paciente'), 3 => trans('Administrador')];
+        return $tipos_usuario[$this->tipo_usuario_id];
     }
 }

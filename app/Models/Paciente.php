@@ -10,6 +10,8 @@ class Paciente extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nuhsa'];
+
     public function citas(){
         return $this->hasMany(Cita::class);
     }
@@ -29,5 +31,9 @@ class Paciente extends Model
             */
         }
         return $medicamentos_actuales;
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

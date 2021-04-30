@@ -18,6 +18,8 @@ class CreatePacientesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('nuhsa');
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
+
         });
     }
 
