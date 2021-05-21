@@ -64,7 +64,8 @@ class MedicoController extends Controller
      */
     public function show(Medico $medico)
     {
-        //
+        $especialidads = Especialidad::all();
+        return view('medicos/show', ['medico' => $medico, 'especialidads' => $especialidads]);
     }
 
     /**
