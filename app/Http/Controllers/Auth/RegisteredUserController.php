@@ -8,6 +8,7 @@ use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Rules\Nuhsa;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -42,27 +43,29 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
             'tipo_usuario_id' => 'required|numeric'
-        ]);
+        ];
 
         $tipo_usuario_id = intval($request->tipo_usuario_id);
         if($tipo_usuario_id == 1){
             //Médico
-            $request->validate(['fecha_contratacion' => 'required|date',
+            $reglas_medico = ['fecha_contratacion' => 'required|date',
                 'vacunado' => 'required|boolean',
                 'sueldo' => 'required|numeric',
                 'especialidad_id' => 'required|exists:especialidads,id'
-            ]);
+            ];
+            $rules = array_merge($reglas_medico, $rules);
         }
         elseif($tipo_usuario_id == 2){
             //Paciente
-            $request->validate(['nuhsa' => 'required|string|max:12|min:12',
-            ]);
+            $reglas_paciente = ['nuhsa' => ['required', 'string', 'max:12', 'min:12', new Nuhsa()]];
+            $rules = array_merge($reglas_paciente, $rules);
         }
+        $request->validate($rules);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -82,9 +85,7 @@ class RegisteredUserController extends Controller
         }
         $user->fresh();
         Auth::login($user);
-
         event(new Registered($user));
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

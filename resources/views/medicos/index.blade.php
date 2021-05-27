@@ -123,6 +123,8 @@
 
                         </tbody>
                     </table>
+                    {{ $medicos->links() }}
+
                 </div>
             </div>
         </div>

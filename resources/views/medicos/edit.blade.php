@@ -102,7 +102,7 @@
 
                             <div class="flex items-center justify-end mt-4">
                                 <x-button type="button" class="bg-red-800 hover:bg-red-700">
-                                    <a href={{route('medicos.index')}}>
+                                    <a href={{\Illuminate\Support\Facades\Auth::user()->tipo_usuario_id == 3 ? route('medicos.index') :  url()->previous()}}>
                                     {{ __('Cancelar') }}
                                     </a>
                                 </x-button>

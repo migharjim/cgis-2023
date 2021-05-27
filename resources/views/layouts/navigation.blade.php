@@ -12,16 +12,24 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
-                        {{ __('Especialidades') }}
-                    </x-nav-link>
-                    @if(Auth::user()->tipo_usuario_id != 2)
-                    <x-nav-link :href="route('medicos.index')" :active="request()->routeIs('medicos.index') or request()->routeIs('medicos.create') or request()->routeIs('medicos.edit') or request()->routeIs('medicos.show')">
-                        {{ __('Médicos') }}
-                    </x-nav-link>
+                    @if(in_array(Auth::user()->tipo_usuario_id, [1,2]))
+                        <x-nav-link :href="route('citas.index')" :active="request()->routeIs('citas.index') or request()->routeIs('citas.create') or request()->routeIs('citas.edit') or request()->routeIs('citas.show')">
+                            {{ __('Mis citas') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->tipo_usuario_id == 3)
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
+                                {{ __('Especialidades') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('medicos.index')" :active="request()->routeIs('medicos.index') or request()->routeIs('medicos.create') or request()->routeIs('medicos.edit') or request()->routeIs('medicos.show')">
+                                {{ __('Médicos') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('citas.index')" :active="request()->routeIs('citas.index') or request()->routeIs('citas.create') or request()->routeIs('citas.edit') or request()->routeIs('citas.show')">
+                                {{ __('Citas') }}
+                            </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -52,6 +60,11 @@
                                 {{ __('Log out') }}
                             </x-dropdown-link>
                         </form>
+                        @if(\Illuminate\Support\Facades\Auth::user()->tipo_usuario_id == 1)
+                        <x-dropdown-link :href="route('medicos.edit', Auth::user()->medico->id)">
+                            {{ __('Mi perfil') }}
+                        </x-dropdown-link>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>

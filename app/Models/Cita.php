@@ -20,7 +20,7 @@ class Cita extends Model
     }
 
     public function paciente(){
-        return $this->belongsTo(Paciente::class)->with('medicamentos_actuales');
+        return $this->belongsTo(Paciente::class);
     }
 
     public function medicamentos(){

@@ -51,7 +51,11 @@ class User extends Authenticatable
         return $this->hasOne(Paciente::class);
     }
 
-    //$user->tipo_usuario_id
+    /* Las funciones que se llaman getXXXXAttribute se llaman accesors y
+     permiten su acceso mediante llamada como parámetro mágico:
+    $user->tipo_usuario_id
+    (https://laravel.com/docs/8.x/eloquent-mutators)
+    */
     public function getTipoUsuarioIdAttribute(){
         if ($this->medico()->exists()){
             return 1;

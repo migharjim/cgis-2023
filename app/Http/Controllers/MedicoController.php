@@ -102,7 +102,7 @@ class MedicoController extends Controller
         $user->save();
         $medico->fill($request->all());
         $medico->save();
-        session()->flash('success', 'Médico modificadao correctamente. Si nos da tiempo haremos este mensaje internacionalizable y parametrizable');
+        session()->flash('success', 'Médico modificado correctamente. Si nos da tiempo haremos este mensaje internacionalizable y parametrizable');
         return redirect()->route('medicos.index');
     }
 
