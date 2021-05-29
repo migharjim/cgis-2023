@@ -12,7 +12,7 @@ class Cita extends Model
     protected $fillable = ['fecha_hora', 'medico_id', 'paciente_id'];
 
     protected $casts = [
-        'fecha_hora' => 'datetime:Y-m-d H:i'
+        'fecha_hora' => 'datetime:Y-m-d H:i',
     ];
 
     public function medico(){
@@ -24,6 +24,6 @@ class Cita extends Model
     }
 
     public function medicamentos(){
-        return $this->belongsToMany(Medicamento::class)->withPivot('tomas_dia', 'comentarios', 'inicio', 'fin');
+        return $this->belongsToMany(Medicamento::class)->using(CitaMedicamentoPivot::class)->withPivot('tomas_dia', 'comentarios', 'inicio', 'fin');
     }
 }

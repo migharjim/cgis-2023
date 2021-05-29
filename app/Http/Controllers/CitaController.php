@@ -3,24 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
-use App\Models\Especialidad;
+use App\Models\Medicamento;
 use App\Models\Medico;
 use App\Models\Paciente;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CitaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Cita::class, 'cita');
+    }
+
     public function index()
     {
-        $citas = Cita::paginate(25);
+        $citas = Cita::orderBy('fecha_hora', 'desc')->paginate(25);
         if(Auth::user()->tipo_usuario_id == 1){
-            $citas = Auth::user()->medico->citas()->paginate(25);
+            $citas = Auth::user()->medico->citas()->orderBy('fecha_hora', 'desc')->paginate(25);
         }
         elseif(Auth::user()->tipo_usuario_id == 2){
-            $citas = Auth::user()->paciente->citas()->paginate(25);
+            $citas = Auth::user()->paciente->citas()->orderBy('fecha_hora', 'desc')->paginate(25);
         }
         return view('/citas/index', ['citas' => $citas]);
     }
@@ -66,15 +71,17 @@ class CitaController extends Controller
 
     public function edit(Cita $cita)
     {
+        //Le paso a la vista los medicamentos porque permito añadir una prescripción desde esa misma vista
+        $medicamentos = Medicamento::all();
         $medicos = Medico::all();
         $pacientes = Paciente::all();
         if(Auth::user()->tipo_usuario_id == 1){
-            return view('citas/edit', ['cita' => $cita, 'medico' => Auth::user()->medico, 'pacientes' => $pacientes]);
+            return view('citas/edit', ['cita' => $cita, 'medico' => Auth::user()->medico, 'pacientes' => $pacientes, 'medicamentos' => $medicamentos]);
         }
         elseif(Auth::user()->tipo_usuario_id == 2) {
-            return view('citas/edit', ['cita' => $cita, 'paciente' => Auth::user()->paciente, 'medicos' => $medicos]);
+            return view('citas/edit', ['cita' => $cita, 'paciente' => Auth::user()->paciente, 'medicos' => $medicos, 'medicamentos' => $medicamentos]);
         }
-        return view('citas/edit', ['cita' => $cita, 'pacientes' => $pacientes, 'medicos' => $medicos]);
+        return view('citas/edit', ['cita' => $cita, 'pacientes' => $pacientes, 'medicos' => $medicos, 'medicamentos' => $medicamentos]);
     }
 
     public function update(Request $request, Cita $cita)
@@ -107,5 +114,29 @@ class CitaController extends Controller
             session()->flash('warning', 'La cita no pudo borrarse. Es probable que se deba a que tenga asociada información como citas que dependen de él.');
         }
         return redirect()->route('citas.index');
+    }
+
+    public function attach_medicamento(Request $request, Cita $cita)
+    {
+        $this->validateWithBag('attach',$request, [
+            'medicamento_id' => 'required|exists:medicos,id',
+            'inicio' => 'required|date',
+            'fin' => 'required|date|after:inicio',
+            'comentarios' => 'nullable|string',
+            'tomas_dia' => 'required|numeric|min:0',
+        ]);
+        $cita->medicamentos()->attach($request->medicamento_id, [
+            'inicio' => $request->inicio,
+            'fin' => $request->fin,
+            'comentarios' => $request->comentarios,
+            'tomas_dia' => $request->tomas_dia
+        ]);
+        return redirect()->route('citas.edit', $cita->id);
+    }
+
+    public function detach_medicamento(Cita $cita, Medicamento $medicamento)
+    {
+        $cita->medicamentos()->detach($medicamento->id);
+        return redirect()->route('citas.edit', $cita->id);
     }
 }

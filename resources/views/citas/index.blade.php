@@ -31,6 +31,7 @@
                             <th class="py-3 px-6 text-left">Paciente</th>
                             @endif
                             <th class="py-3 px-6 text-left">Fecha</th>
+                            <th class="py-3 px-6 text-left">Recetas</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -62,7 +63,11 @@
                                         <span class="font-medium">{{$cita->fecha_hora->format('d/m/Y H:i')}}</span>
                                     </div>
                                 </td>
-
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{$cita->medicamentos()->count()}}</span>
+                                    </div>
+                                </td>
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-end">
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">

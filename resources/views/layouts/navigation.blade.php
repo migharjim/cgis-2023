@@ -18,8 +18,11 @@
                         </x-nav-link>
                     @endif
                     @if(Auth::user()->tipo_usuario_id == 3)
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{--<x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
+                            </x-nav-link>--}}
+                            <x-nav-link :href="route('medicamentos.index')" :active="request()->routeIs('medicamentos.index') or request()->routeIs('medicamentos.create') or request()->routeIs('medicamentos.edit') or request()->routeIs('medicamentos.show')">
+                                {{ __('Medicamentos') }}
                             </x-nav-link>
                             <x-nav-link :href="route('especialidads.index')" :active="request()->routeIs('especialidads.index') or request()->routeIs('especialidads.create') or request()->routeIs('especialidads.edit')">
                                 {{ __('Especialidades') }}
