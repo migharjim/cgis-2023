@@ -151,7 +151,7 @@
 
                             <div class="">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Si pinchas en el título, te llevará al proyecto almacenado en Github. Puedes acceder a la documentación de Laravel 8 <a target="_blank" href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">aquí</a>. Utiliza los enlaces de la esquina superior derecha para acceder.
+                                    Si pinchas en el título, te llevará al proyecto almacenado en Github. Puedes acceder a la documentación de Laravel 9 <a target="_blank" href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">aquí</a>. Utiliza los enlaces de la esquina superior derecha para acceder.
                                 </div>
                             </div>
                         </div>

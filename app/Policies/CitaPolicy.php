@@ -31,7 +31,7 @@ class CitaPolicy
      */
     public function view(User $user, Cita $cita)
     {
-        return $user->tipo_usuario_id == 3 || ($user->tipo_usuario_id == 2 && $cita->paciente_id == $user->id) || ($user->tipo_usuario_id == 1 && $cita->medico_id == $user->id);
+        return $user->tipo_usuario_id == 3 || ($user->tipo_usuario_id == 2 && $cita->paciente_id == $user->paciente->id) || ($user->tipo_usuario_id == 1 && $cita->medico_id == $user->medico->id);
     }
 
     /**
