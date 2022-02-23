@@ -40,6 +40,7 @@ El objetivo de esta aplicación es mostrar un proyecto mínimo donde se trabaje 
   - Trabajo con formularios y validación básica en cliente con HTML para la edición de recursos, incluyendo la gestión de errores recibidos por parte del Controlador así como poblar por defecto los valores de los inputs con los valores que vienen en el recurso a editar. Por ejemplo: resources/views/medicos/edit.blade.php. Más info sobre formularios: https://laravel.com/docs/master/blade#forms
   - Vistas de detalle de un recurso, que puede mostrar no solo información relativa a ese recurso, sino a los recursos asociados (foreign keys). Por ejemplo: resources/views/citas/show.blade.php
   - Definición y trabajo con componentes, que son elementos reutilizables del front-end, como botones, inputs, etc. que se usan en toda la aplicación para mantener homogeneidad y no duplicar código. Por ejemplo, resources/views/components/button.blade.php que, una vez definido en el anterior archivo, se utiliza en las vistas, por ejemplo: resources/views/medicos/create.blade.php, como <x-button>. Más info: https://laravel.com/docs/master/blade#components
+- Generación y comprensión del ciclo de autorización por defecto de Laravel. Más info: https://laravel.com/docs/master/authentication
 
 ## Puesta en marcha
 Siga estos pasos para ejecutar la aplicación en Laravel Sail. Se da por supuesto que tiene Docker disponible en su sistema.
