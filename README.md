@@ -1,4 +1,4 @@
-# Proyecto citas CGIS
+# Laboratorio 2: Controlador
 
 ## Objetivo
 El objetivo de este laboratorio es el desarrollo de los elementos básicos de la capa de controlador del proyecto de citas.
