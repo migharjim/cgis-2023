@@ -17,6 +17,15 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+//Solo los administradores pueden crear y borrar médicos, así como trabajar con el CRUD de Medicamentos
+Route::middleware(['auth', 'tipo_usuario:3'])->group(function () {
+    Route::get('/medicos/create', [MedicoController::class, 'create'])->name('medicos.create');
+    Route::post('/medicos', [MedicoController::class, 'store'])->name('medicos.store');
+    Route::delete('/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy');
+    Route::resources([
+        'medicamentos' => MedicamentoController::class,
+    ]);
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::resources([
@@ -32,16 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/medicos/{medico}', [MedicoController::class, 'show'])->name('medicos.show');
 });
 
-//Solo los administradores pueden crear y borrar médicos, así como trabajar con el CRUD de Medicamentos
-Route::middleware(['auth', 'tipo_usuario:3'])->group(function () {
-    Route::get('/medicos/create', [MedicoController::class, 'create'])->name('medicos.create');
-    Route::post('/medicos', [MedicoController::class, 'store'])->name('medicos.store');
-    Route::delete('/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy');
-    Route::resources([
-        'medicamentos' => MedicamentoController::class,
-    ]);
-});
-
 //Tanto los médicos como los administradores pueden editar el médico y trabajar con los medicamentos de las citas
 Route::middleware(['auth', 'tipo_usuario:1,3'])->group(function () {
     Route::get('/medicos/{medico}/edit', [MedicoController::class, 'edit'])->name('medicos.edit');
@@ -54,3 +53,5 @@ Route::middleware(['auth', 'tipo_usuario:1,3'])->group(function () {
         ->name('citas.detachMedicamento')
         ->middleware('can:detach_medicamento,cita');
 });
+
+
