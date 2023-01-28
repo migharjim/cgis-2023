@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Medicamento::class, 'medicamento');
+    }
+
     public function index()
     {
         $medicamentos = Medicamento::paginate(25);

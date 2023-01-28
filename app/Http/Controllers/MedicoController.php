@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class MedicoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Medico::class, 'medico');
+    }
+
     public function index()
     {
         $medicos = Medico::paginate(25);

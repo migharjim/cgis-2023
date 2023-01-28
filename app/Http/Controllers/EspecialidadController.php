@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class EspecialidadController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Especialidad::class, 'especialidad');
+    }
+
+
     public function index()
     {
         $especialidades = Especialidad::paginate(25);
@@ -33,21 +39,8 @@ class EspecialidadController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required|string|max:255',
-            /*'descripcion' => 'required|string|max:255',
-            'precio' => 'required|numeric',
-            'amortizacion' => 'required|numeric',
-            'reparaciones' => 'required|numeric',
-            'lote_id' => 'required|max:255|exists:lotes,id',*/
         ], [
-            /*'referencia.required' => 'El campo Referencia es obligatorio',
-            'descripcion.required' => 'El campo Descripción es obligatorio',
-            'precio.required' => 'El campo Precio es obligatorio',
-            'precio.numeric' => 'El campo Precio debe ser un número',
-            'amortizacion.required' => 'El campo Amortización es obligatorio',
-            'amortizacion.numeric' => 'El campo Amortización debe ser un número',
-            'reparaciones.required' => 'El campo Reparaciones es obligatorio',
-            'reparaciones.numeric' => 'El campo Reparaciones debe ser un número',
-            'lote_id.required' => 'El campo Lote es obligatorio',*/
+            'nombre.required' => 'La especialidad es obligatoria',
         ]);
         $especialidad = new Especialidad($request->all());
         $especialidad->save();
