@@ -1,6 +1,7 @@
 # Proyecto citas CGIS
 
 ## Objetivo
+Este es el objetivo actualizado
 El objetivo de esta aplicación es mostrar un proyecto mínimo donde se trabaje con:
 - Laravel Sail como entorno de desarrollo basado en Docker. Más info: https://laravel.com/docs/master/sail
 - Eloquent ORM para trabajar a alto nivel con base de datos MySQL, incluyendo:
